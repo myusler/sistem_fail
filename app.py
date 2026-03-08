@@ -9,7 +9,7 @@ database_url = os.environ.get('DATABASE_URL')  # Ambil dari env Render
 if database_url and database_url.startswith("postgres://"):
     # SQLAlchemy perlukan postgresql:// bukannya postgres://
     database_url = database_url.replace("postgres://", "postgresql://", 1)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
