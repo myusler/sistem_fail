@@ -20,6 +20,9 @@ class Document(db.Model):
     title = db.Column(db.String(200))
     description = db.Column(db.String(500))
 
+with app.app_context():
+        db.create_all()
+
 @app.route('/')
 def index():
     docs = Document.query.order_by(Document.serial).all()
@@ -91,8 +94,7 @@ def down(id):
     return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
+    
     
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
