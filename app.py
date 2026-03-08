@@ -1,7 +1,14 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+# --- DATABASE CONFIG ---
+database_url = os.environ.get('DATABASE_URL')  # Ambil dari env Render
+if database_url and database_url.startswith("postgres://"):
+    # SQLAlchemy perlukan postgresql:// bukannya postgres://
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
