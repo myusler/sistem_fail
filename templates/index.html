@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<a href="/add" class="btn btn-success mb-3">Tambah Dokumen</a>
+
+<div class="card shadow">
+
+<table class="table table-striped">
+
+<tr>
+<th>No</th>
+<th>Tajuk</th>
+<th>Keterangan</th>
+<th>Susun</th>
+<th>Aksi</th>
+</tr>
+
+{% for d in docs %}
+
+<tr>
+
+<td>{{ d.serial }}</td>
+
+<td>{{ d.title }}</td>
+
+<td>{{ d.description }}</td>
+
+<td>
+<a href="/up/{{ d.id }}" class="btn btn-sm btn-secondary">↑</a>
+<a href="/down/{{ d.id }}" class="btn btn-sm btn-secondary">↓</a>
+</td>
+
+<td>
+<a href="/edit/{{ d.id }}" class="btn btn-warning btn-sm">Edit</a>
+<a href="/delete/{{ d.id }}" class="btn btn-danger btn-sm">Delete</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}
